@@ -20,8 +20,8 @@ namespace CrudUbicaciones_SLE
             {
                 ListarUbicaciones();
             }
-            
-            
+
+
         }
 
 
@@ -30,7 +30,29 @@ namespace CrudUbicaciones_SLE
         {
             oUbicacionesDAL = new ubicaciones_DAL();
             gvUbicaciones.DataSource = oUbicacionesDAL.Listar();
-            gvUbicaciones.DataBind(); 
+            gvUbicaciones.DataBind();
+        }
+
+        //METODO ENCARGADO DE LOS DATOS DE NUESTRA INTERFAZ
+        public ubicaciones_BLL datosUbicacion()
+        {
+            int ID = 0;
+            int.TryParse(txtID.Value, out ID);
+            oUbicacionesBLL = new ubicaciones_BLL();
+            //RECOLETAR DATOS DE LA CAPA DE PRESENTACION
+            oUbicacionesBLL.ID = ID;
+            oUbicacionesBLL.Ubicacion = txtUbicacion.Text;
+            oUbicacionesBLL.Latitud = txtLat.Text;
+            oUbicacionesBLL.Longitud= txtLong.Text;
+
+            return oUbicacionesBLL;
+        }
+
+        protected void AgregarRegistro(object sender, EventArgs e)
+        {
+            oUbicacionesDAL = new ubicaciones_DAL();
+            oUbicacionesDAL.Agregar(datosUbicacion());
+            ListarUbicaciones(); //PARA MOSTRARLO EN EL GV
         }
     }
 }
