@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmUbicaciones.aspx.cs" Inherits="CrudUbicaciones_SLE.frmUbicaciones" %>
 
-<!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -36,7 +34,7 @@
                     <div class="form-group">
                         <asp:Button ID="btnAgregar" CssClass="btn btn-success" runat="server" Text="Agregar" UseSubmitBehavior="false" OnClick="AgregarRegistro" />
                         <asp:Button ID="btnModificar" CssClass="btn btn-warning" runat="server" Text="Modificar" UseSubmitBehavior="false" Enabled="false" />
-                        <asp:Button ID="btnEliminar" CssClass="btn btn-danger" runat="server" Text="Eliminar" UseSubmitBehavior="false" Enabled="false" />
+                        <asp:Button ID="btnEliminar" CssClass="btn btn-danger" runat="server" Text="Eliminar" UseSubmitBehavior="false" Enabled="false" OnClick="EliminarRegistro" />
                         <asp:Button ID="btnLimpiar" CssClass="btn btn-default" runat="server" Text="Limpiar" UseSubmitBehavior="false" />
 
                     </div>
@@ -45,10 +43,10 @@
                 <div class="col-md-8">
                     <br />
                     <h1>Ubicaciones </h1>
-                    <asp:GridView ID="gvUbicaciones" runat="server" CssClass="table-responsive table table-bordered">
+                    <asp:GridView ID="gvUbicaciones" runat="server" CssClass="table-responsive table table-bordered" OnRowCommand="SeleccionRegistros">
                         <Columns>
                             <asp:ButtonField CommandName="btnSeleccionar" Text="Seleccionar">
-                            <ControlStyle CssClass="btn btn-info" />
+                                <ControlStyle CssClass="btn btn-info" />
                             </asp:ButtonField>
                         </Columns>
                     </asp:GridView>
@@ -60,15 +58,15 @@
                 radius: 0,
                 location: {
                     latitude: $('#<%=txtLat.ClientID%>').val(),
-                longitude: $('#<%=txtLong.ClientID%>').val()
-            },
-            inputBinding: {
-                latitudeInput: $('#<%=txtLat.ClientID%>'),
-                longitudeInout: $('#<%=txtLong.ClientID%>'),
-                locationNameInput: $('#<%=txtUbicacion.ClientID%>')
-            },
-            enableAutocomplete: true
-        });
+                    longitude: $('#<%=txtLong.ClientID%>').val()
+                },
+                inputBinding: {
+                    latitudeInput: $('#<%=txtLat.ClientID%>'),
+                    longitudeInout: $('#<%=txtLong.ClientID%>'),
+                    locationNameInput: $('#<%=txtUbicacion.ClientID%>')
+                },
+                enableAutocomplete: true
+            });
         </script>
 
     </form>

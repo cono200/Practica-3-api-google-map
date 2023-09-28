@@ -54,5 +54,34 @@ namespace CrudUbicaciones_SLE
             oUbicacionesDAL.Agregar(datosUbicacion());
             ListarUbicaciones(); //PARA MOSTRARLO EN EL GV
         }
+
+        protected void SeleccionRegistros(object sender, GridViewCommandEventArgs e)
+        {
+            
+            int FilaSeleccionada = int.Parse(e.CommandArgument.ToString());
+
+            txtID.Value = gvUbicaciones.Rows[FilaSeleccionada].Cells[1].Text;
+            txtUbicacion.Text = gvUbicaciones.Rows[FilaSeleccionada].Cells[2].Text;
+            txtLat.Text = gvUbicaciones.Rows[FilaSeleccionada].Cells[3].Text;
+            txtLong.Text = gvUbicaciones.Rows[FilaSeleccionada].Cells[4].Text;
+
+            //AHORA, AL MOMENTO QUE DEMOS CLICK EN "SELECCIONAR" HABILITAREMOS
+            //LOS BOTONES ELIMINAR Y MODIFICAR, Y A LA VEZ, INHABILITAREMOS
+            //EL BOTON DE AGREGAR 
+
+            btnEliminar.Enabled = true;
+            btnModificar.Enabled = true;
+            btnAgregar.Enabled = false;
+
+
+        }
+
+        protected void EliminarRegistro(object sender, EventArgs e)
+        {
+            oUbicacionesDAL = new ubicaciones_DAL();
+            oUbicacionesDAL.Eliminar(datosUbicacion());
+            ListarUbicaciones();
+
+        }
     }
 }
